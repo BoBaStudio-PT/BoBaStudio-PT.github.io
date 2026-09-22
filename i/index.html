@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Play PIVOT with me</title>
+<meta name="description" content="Your friend invited you to PIVOT. Install the game and you'll be friends automatically.">
+<meta property="og:title" content="Play PIVOT with me!">
+<meta property="og:description" content="Your friend invited you to PIVOT - balance the scale, beat their score.">
+<style>
+  :root {
+    --bg: #0d4a5c; --panel: #0f3b4a; --border: #0a2a35; --text: #f4fbff; --muted: #a9d3de;
+    --cta: #ff9a2e; --cta-dark: #c96a0f; --reward: #ffd24a; --secondary: #62d6ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle at 50% 30%, #1b7a93, var(--bg) 70%); color: var(--text);
+    font: 18px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 16px;
+  }
+  .card {
+    width: 100%; max-width: 420px; background: var(--panel); border: 4px solid var(--border);
+    border-radius: 32px; padding: 32px 24px; text-align: center; box-shadow: 0 8px 0 var(--border);
+  }
+  h1 { margin: 0 0 8px; font-size: 28px; }
+  p { margin: 0 0 20px; color: var(--muted); }
+  .code {
+    font-size: 34px; font-weight: 800; letter-spacing: 2px; color: var(--reward);
+    background: var(--border); border-radius: 999px; padding: 10px 20px; margin: 0 0 24px; display: inline-block;
+  }
+  a.btn {
+    display: block; text-decoration: none; font-weight: 800; font-size: 20px; border-radius: 999px;
+    padding: 16px; margin: 12px 0 0; color: #fff;
+  }
+  .primary { background: var(--cta); box-shadow: 0 6px 0 var(--cta-dark); }
+  .secondary { background: var(--secondary); color: #073443; box-shadow: 0 6px 0 #2a9ab3; font-size: 17px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>Play PIVOT with me!</h1>
+  <p>Install PIVOT and we'll be friends automatically.</p>
+  <div id="code-box" class="hidden">
+    <p>My friend code</p>
+    <div id="code" class="code"></div>
+  </div>
+  <a id="store" class="btn primary" href="https://play.google.com/store/apps/details?id=com.bobastudio.pivot">Get it on Google Play</a>
+  <a id="open" class="btn secondary hidden" href="#">I already have PIVOT - open it</a>
+</main>
+<script>
+  // Mesma regra de FriendsConfig.clean_code / game.clean_friend_code (8 carateres, sem I/L/O/0/1).
+  var ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  var raw = new URLSearchParams(location.search).get("c") || "";
+  var code = raw.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8);
+  var valid = code.length === 8 && code.split("").every(function (ch) { return ALPHABET.indexOf(ch) >= 0; });
+  if (valid) {
+    var store = "https://play.google.com/store/apps/details?id=com.bobastudio.pivot&referrer=" +
+      encodeURIComponent("pivot_friend=" + code);
+    document.getElementById("code").textContent = code.slice(0, 4) + "-" + code.slice(4);
+    document.getElementById("code-box").classList.remove("hidden");
+    document.getElementById("store").href = store;
+    // Browsers dentro do Instagram/TikTok não abrem App Links sozinhos: um intent:// abre
+    // o jogo se estiver instalado e cai na Play Store (com o código) se não estiver.
+    if (/Android/i.test(navigator.userAgent)) {
+      var open = document.getElementById("open");
+      open.href = "intent://" + location.host + "/i/?c=" + code +
+        "#Intent;scheme=https;package=com.bobastudio.pivot;S.browser_fallback_url=" + encodeURIComponent(store) + ";end";
+      open.classList.remove("hidden");
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bobastudio.pivot",
+      "sha256_cert_fingerprints": [
+        "31:DC:D0:A1:CC:55:A9:9E:DD:88:24:34:F8:30:4D:47:E3:83:E3:73:A8:81:10:85:80:F7:0C:8D:DC:F1:1D:B4"
+      ]
+    }
+  }
+]
