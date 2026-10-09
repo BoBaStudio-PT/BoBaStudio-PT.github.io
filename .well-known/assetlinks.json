@@ -5,6 +5,17 @@
       "namespace": "android_app",
       "package_name": "com.bobastudio.pivot",
       "sha256_cert_fingerprints": [
+        "92:44:B0:F2:E2:B8:E4:C3:24:05:28:BA:AE:A8:DC:49:36:2F:3E:7C:E1:80:E4:FE:59:63:35:17:94:3B:29:07",
+        "31:DC:D0:A1:CC:55:A9:9E:DD:88:24:34:F8:30:4D:47:E3:83:E3:73:A8:81:10:85:80:F7:0C:8D:DC:F1:1D:B4"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bobastudio.pivot.test",
+      "sha256_cert_fingerprints": [
         "31:DC:D0:A1:CC:55:A9:9E:DD:88:24:34:F8:30:4D:47:E3:83:E3:73:A8:81:10:85:80:F7:0C:8D:DC:F1:1D:B4"
       ]
     }
